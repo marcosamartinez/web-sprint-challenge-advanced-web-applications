@@ -5,15 +5,11 @@ const initialFormValues = { title: "", text: "", topic: "" };
 
 export default function ArticleForm(props) {
   const [values, setValues] = useState(initialFormValues);
-  // ✨ where are my props? Destructure them here
+
   const { currentArticle, postArticle, updateArticle, setCurrentArticleId } =
     props;
 
   useEffect(() => {
-    // ✨ implement
-    // Every time the `currentArticle` prop changes, we should check it for truthiness:
-    // if it's truthy, we should set its title, text and topic into the corresponding
-    // values of the form. If it's not, we should reset the form back to initial values.
     setValues(currentArticle || initialFormValues);
   }, [currentArticle]);
 
@@ -35,21 +31,16 @@ export default function ArticleForm(props) {
   };
 
   const isDisabled = () => {
-    // Check if title and text are valid (length >= 1 after trimming)
     const isTitleValid = values.title.trim().length >= 1;
     const isTextValid = values.text.trim().length >= 1;
 
-    // Check if topic is one of the valid options
     const validTopics = ["React", "JavaScript", "Node"];
     const isTopicValid = validTopics.includes(values.topic);
 
-    // Button should be disabled if ANY of the conditions are NOT met
     return !(isTitleValid && isTextValid && isTopicValid);
   };
 
   return (
-    // ✨ fix the JSX: make the heading display either "Edit" or "Create"
-    // and replace Function.prototype with the correct function
     <form id="form" onSubmit={onSubmit}>
       <h2>Create Article</h2>
       <input

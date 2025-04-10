@@ -11,13 +11,11 @@ const articlesUrl = "http://localhost:9000/api/articles";
 const loginUrl = "http://localhost:9000/api/login";
 
 export default function App() {
-  // ✨ MVP can be achieved with these states
   const [message, setMessage] = useState("");
   const [articles, setArticles] = useState([]);
   const [currentArticleId, setCurrentArticleId] = useState();
   const [spinnerOn, setSpinnerOn] = useState(false);
 
-  // ✨ Research `useNavigate` in React Router v.6
   const navigate = useNavigate();
   const redirectToLogin = () => {
     navigate("/");
@@ -138,7 +136,6 @@ export default function App() {
   };
 
   const updateArticle = ({ article_id, article }) => {
-    // Make sure we have a valid article_id
     if (!article_id) {
       setMessage("Error: No article ID provided for update");
       return;
@@ -160,7 +157,7 @@ export default function App() {
             art.article_id === article_id ? response.data.article : art
           )
         );
-        setCurrentArticleId(null); // Reset the current article ID to clear the form
+        setCurrentArticleId(null);
       })
       .catch((error) => {
         console.error("Update error:", error);
@@ -214,7 +211,6 @@ export default function App() {
       </button>
       <div id="wrapper" style={{ opacity: spinnerOn ? "0.25" : "1" }}>
         {" "}
-        {/* <-- do not change this line */}
         <h1>Advanced Web Applications</h1>
         <nav>
           <NavLink id="loginScreen" to="/">
